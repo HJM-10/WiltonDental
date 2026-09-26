@@ -1,35 +1,55 @@
-# Wilton Dental redesign concept
+# Wilton Dental website
 
-A high-motion, responsive website concept for Wilton Dental Practice in Victoria, London.
+A source-backed, multi-page redesign retaining the original logo and authentic practice/team imagery.
 
-## Preview locally
-
-Serve the `dist` directory with any static HTTP server. For example:
+## Build and preview
 
 ```powershell
+python scripts/build.py
 python -m http.server 4173 --directory dist
 ```
 
-Then open `http://localhost:4173/`.
+Open http://localhost:4173/. The build uses Python's standard library. Generated output in `dist` works without a build step on Vercel.
 
-## Deploy to Vercel
+## Structure
 
-Import this repository into Vercel with the project root left at the repository root. The checked-in `vercel.json` selects the `dist` directory as the static output, so no install or build command is required.
+- `src/content.py`: treatment and team content.
+- `scripts/build.py`: shared templates, 29 pages (28 content pages and a not-found design) and four legacy redirects.
+- `src/site.css`: branding, responsive layouts and motion.
+- `src/site.js`: navigation, filtering, care-journey progress and imaging explorer.
+- `src/tooth-viewer.js`: GLB rendering, controls, lifecycle and fallback.
+- `scripts/build_tooth.py`: original illustrative mesh; requires NumPy and Pillow.
+- `docs/sources/`: dated source snapshots and asset provenance.
+- `docs/verification.json`: latest browser verification results.
+- `audit/src/build-documentation.py`: A4 report generator; requires ReportLab, Pillow and Windows fonts.
 
-## Highlights
+## Verification
 
-- Animated opening sequence and scroll progress
-- Responsive kinetic hero and treatment cards
-- Pointer-responsive depth and magnetic interactions
-- Enhanced clinician portrait treatment
-- Scroll-linked care journey
-- Interactive consultation prototype
-- Reduced-motion accessibility support
+Run `node scripts/verify.cjs` with the local server running. The script uses the bundled Playwright runtime and installed Chrome. Change its two runtime paths when using another machine.
 
-## Visual audit and identity concepts
+Checks cover generated routes, links/assets, four responsive widths, axe accessibility rules, menu, filters, contact context, map, 3D controls, reduced motion, data saving, failed-model fallback and JavaScript-disabled reading. No enquiry is sent.
 
-- [Client-facing website audit](output/pdf/Wilton-Dental-Website-Audit.pdf)
-- [Editable logo concepts](brand/logo-concepts/)
+## Current scope
 
-The audit includes current-site screenshots, before-and-after comparisons, accessibility and launch findings, three warmer colour directions, and three vector logo concepts.
+- 13 treatment pages plus directory and imaging page.
+- All six published team members with individual profiles.
+- Practice, care options, fees, contact and website information pages.
+- Original logo, locally hosted typography and source photography.
+- Animated 3D opening, motion pause, keyboard controls, OPG/CBCT explorer and card/scroll effects.
+- The four-stage care journey and the practice's original Google Maps embed on the homepage and contact page.
 
+There is no booking backend. Contact links open the relevant application and do not promise a booking. The site is intentionally noindex: current fees, NHS intake, biographies, registration details, service arrangements and practice policies require approval before public launch.
+
+## Deployment and rollback
+
+The existing GitHub/Vercel structure is preserved. `vercel.json` serves `dist`, maps four old public routes and avoids immutable caching of unversioned assets. Changes pushed to `main` use the existing repository deployment configuration; replacing the live practice website still requires practice approval. The ignored `.openai` registration is historical.
+
+Baseline repository revision: `62fc513`. Starting files were also copied to `tmp/baseline`.
+
+## Documentation
+
+- `output/pdf/Wilton-Dental-Project-Report.pdf`: current audit and implementation report.
+- `docs/IMPLEMENTATION_PLAN.md`: scope and acceptance sequence.
+- `docs/routes.json`: generated route inventory.
+
+The previous audit and logo concepts are historical artifacts, superseded by the new report and original-logo direction.

@@ -1,0 +1,176 @@
+[
+  {
+    "path": "/",
+    "title": "Dental care in Victoria, London",
+    "description": "NHS, independent and private dental care at Wilton Dental Practice. Explore treatments, meet the full team and plan your visit in Victoria.",
+    "file": "index.html"
+  },
+  {
+    "path": "/treatments/",
+    "title": "Treatments",
+    "description": "Explore the complete range of dental, skin and wellbeing services listed by Wilton Dental Practice.",
+    "file": "treatments/index.html"
+  },
+  {
+    "path": "/treatments/white-fillings/",
+    "title": "White fillings",
+    "description": "A natural-looking way to restore a damaged tooth. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/white-fillings/index.html"
+  },
+  {
+    "path": "/treatments/dental-implants/",
+    "title": "Dental implants",
+    "description": "Explore a lasting replacement for a missing tooth. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/dental-implants/index.html"
+  },
+  {
+    "path": "/treatments/invisible-braces/",
+    "title": "Invisible braces",
+    "description": "A discreet approach to straighter teeth. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/invisible-braces/index.html"
+  },
+  {
+    "path": "/treatments/root-canal/",
+    "title": "Root canal treatment",
+    "description": "Treatment focused on preserving your natural tooth. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/root-canal/index.html"
+  },
+  {
+    "path": "/treatments/dental-hygiene/",
+    "title": "Dental hygiene",
+    "description": "Support for healthier teeth and gums, every day. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/dental-hygiene/index.html"
+  },
+  {
+    "path": "/treatments/wisdom-teeth/",
+    "title": "Wisdom-tooth care",
+    "description": "Clear guidance when wisdom teeth cause concern. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/wisdom-teeth/index.html"
+  },
+  {
+    "path": "/treatments/sedation/",
+    "title": "Conscious sedation",
+    "description": "Talk to us about support for dental anxiety. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/sedation/index.html"
+  },
+  {
+    "path": "/treatments/smile-makeovers/",
+    "title": "Smile makeovers",
+    "description": "A considered plan, shaped around your smile. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/smile-makeovers/index.html"
+  },
+  {
+    "path": "/treatments/teeth-whitening/",
+    "title": "Teeth whitening",
+    "description": "Professional advice for a brighter smile. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/teeth-whitening/index.html"
+  },
+  {
+    "path": "/treatments/facial-aesthetics/",
+    "title": "Facial aesthetics",
+    "description": "An individual conversation about your aesthetic goals. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/facial-aesthetics/index.html"
+  },
+  {
+    "path": "/treatments/stress-therapy/",
+    "title": "Stress therapy",
+    "description": "Start a conversation about feeling more at ease. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/stress-therapy/index.html"
+  },
+  {
+    "path": "/treatments/microdermabrasion/",
+    "title": "Microdermabrasion",
+    "description": "A consultation-led approach to skin resurfacing. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/microdermabrasion/index.html"
+  },
+  {
+    "path": "/treatments/microneedling/",
+    "title": "Microneedling",
+    "description": "Understand your skin-treatment options before deciding. Learn about your options at Wilton Dental Practice in Victoria.",
+    "file": "treatments/microneedling/index.html"
+  },
+  {
+    "path": "/team/",
+    "title": "Our team",
+    "description": "Meet all six members of the Wilton Dental Practice team, including the principal dentist, dental therapist, treatment co-ordinator and nursing team.",
+    "file": "team/index.html"
+  },
+  {
+    "path": "/team/wale-towolawi/",
+    "title": "Dr Wale Towolawi",
+    "description": "Dr Wale Towolawi \u00b7 Principal dentist & oral surgeon at Wilton Dental Practice, Victoria, London.",
+    "file": "team/wale-towolawi/index.html"
+  },
+  {
+    "path": "/team/namitha-shibu/",
+    "title": "Dr Namitha Shibu",
+    "description": "Dr Namitha Shibu \u00b7 Dental therapist at Wilton Dental Practice, Victoria, London.",
+    "file": "team/namitha-shibu/index.html"
+  },
+  {
+    "path": "/team/shruti-pawar/",
+    "title": "Ms Shruti Pawar",
+    "description": "Ms Shruti Pawar \u00b7 Treatment co-ordinator at Wilton Dental Practice, Victoria, London.",
+    "file": "team/shruti-pawar/index.html"
+  },
+  {
+    "path": "/team/steffeena-mathews/",
+    "title": "Ms Steffeena Mathews",
+    "description": "Ms Steffeena Mathews \u00b7 Dental nurse at Wilton Dental Practice, Victoria, London.",
+    "file": "team/steffeena-mathews/index.html"
+  },
+  {
+    "path": "/team/tinu-oloyede/",
+    "title": "Ms Tinu Oloyede",
+    "description": "Ms Tinu Oloyede \u00b7 Dental nursing team at Wilton Dental Practice, Victoria, London.",
+    "file": "team/tinu-oloyede/index.html"
+  },
+  {
+    "path": "/team/sanju-balami/",
+    "title": "Ms Sanju Balami",
+    "description": "Ms Sanju Balami \u00b7 Dental nurse at Wilton Dental Practice, Victoria, London.",
+    "file": "team/sanju-balami/index.html"
+  },
+  {
+    "path": "/about/",
+    "title": "Our practice",
+    "description": "Discover Wilton Dental Practice in Victoria: personal dental care, the full practice team and information to help plan your first visit.",
+    "file": "about/index.html"
+  },
+  {
+    "path": "/imaging/",
+    "title": "Imaging & technology",
+    "description": "Digital OPG X-rays and 3D CBCT scans at Wilton Dental Practice in Victoria. Information for patients and referring dentists.",
+    "file": "imaging/index.html"
+  },
+  {
+    "path": "/care/",
+    "title": "NHS, independent & private care",
+    "description": "Understand the care pathways listed by Wilton Dental Practice and how to enquire about current NHS and private appointment availability.",
+    "file": "care/index.html"
+  },
+  {
+    "path": "/fees/",
+    "title": "Fees & finance",
+    "description": "Discuss treatment estimates, fees and current finance arrangements with Wilton Dental Practice.",
+    "file": "fees/index.html"
+  },
+  {
+    "path": "/contact/",
+    "title": "Contact & find us",
+    "description": "Contact Wilton Dental on 020 7834 6361. Find the practice at 63a Wilton Road, Victoria, London SW1V 1DE.",
+    "file": "contact/index.html"
+  },
+  {
+    "path": "/privacy/",
+    "title": "Privacy & website information",
+    "description": "How contact links, Google Maps and this Wilton Dental redesign preview handle information.",
+    "file": "privacy/index.html"
+  },
+  {
+    "path": "/404/",
+    "title": "Page not found",
+    "description": "The requested page could not be found.",
+    "file": "404/index.html"
+  }
+]

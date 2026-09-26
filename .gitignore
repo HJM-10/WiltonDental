@@ -1,4 +1,6 @@
 _git_bootstrap_backup/
 .openai/
 tmp/
+__pycache__/
+*.pyc
 
