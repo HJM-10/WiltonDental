@@ -26,3 +26,10 @@ Import this repository into Vercel with the project root left at the repository 
 - Interactive consultation prototype
 - Reduced-motion accessibility support
 
+## Visual audit and identity concepts
+
+- [Client-facing website audit](output/pdf/Wilton-Dental-Website-Audit.pdf)
+- [Editable logo concepts](brand/logo-concepts/)
+
+The audit includes current-site screenshots, before-and-after comparisons, accessibility and launch findings, three warmer colour directions, and three vector logo concepts.
+

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc">
+  <title id="title">Wilton Dental ribbon monogram logo</title>
+  <desc id="desc">A warm copper continuous-line W and smile inside a charcoal circle, paired with an elegant Wilton Dental wordmark.</desc>
+  <rect width="1200" height="400" fill="#F7F1E9"/>
+  <circle cx="205" cy="200" r="132" fill="#1B1820"/>
+  <path d="M100 137 C123 139 127 167 139 228 C145 258 161 269 177 234 L205 170 L233 234 C249 269 265 258 271 228 C283 167 287 139 310 137" fill="none" stroke="#D7875F" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M129 272 C171 305 239 305 281 272" fill="none" stroke="#F7F1E9" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="291" cy="118" r="8" fill="#D7875F"/>
+  <text x="405" y="185" fill="#1B1820" font-family="Georgia,serif" font-size="88" letter-spacing="-2">Wilton</text>
+  <text x="408" y="252" fill="#1B1820" font-family="Arial,sans-serif" font-size="39" font-weight="700" letter-spacing="11">DENTAL PRACTICE</text>
+  <path d="M410 283 H1045" stroke="#D7875F" stroke-width="5"/>
+  <text x="410" y="326" fill="#6A5D5A" font-family="Arial,sans-serif" font-size="21" letter-spacing="5">VICTORIA · WESTMINSTER</text>
+</svg>
