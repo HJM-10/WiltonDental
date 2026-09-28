@@ -16,6 +16,7 @@ Open http://localhost:4173/. The build uses Python's standard library. Generated
 - `src/content.py`: treatment and team content.
 - `scripts/build.py`: shared templates, 29 pages (28 content pages and a not-found design) and four legacy redirects.
 - `src/site.css`: branding, responsive layouts and motion.
+- `src/navigation.css`: slim shared header, animated desktop dropdowns and mobile accordion navigation.
 - `src/site.js`: navigation, filtering, care-journey progress and imaging explorer.
 - `dist/assets/tooth-art.webp`: original glossy tooth artwork with automatic CSS motion.
 - `dist/assets/service-*.webp`: generated treatment illustrations; prompts in `docs/ARTWORK.md`.
@@ -39,7 +40,7 @@ Checks cover generated routes, links/assets, four responsive widths, axe accessi
 - Original glossy tooth opening with gentle automatic rotation and floating motion, OPG/CBCT explorer and card/scroll effects. Device reduced-motion settings are respected; visible motion controls have been removed.
 - Ten new full-bleed illustrations shared across the 13 treatment pages, with single-column cards on phones.
 - Animated benefit cards and a four-stage card-based care journey, plus the practice's original Google Maps embed on the homepage and contact page.
-- Vertical mobile navigation, roomier hero/location/footer layouts and responsive imaging dimensions that preserve the complete scans.
+- A slim header with subtle underline motion, grouped desktop dropdowns and a compact mobile accordion, plus roomier hero/location/footer layouts and responsive imaging dimensions that preserve the complete scans.
 
 There is no booking backend. Contact links open the relevant application and do not promise a booking. The site is intentionally noindex: current fees, NHS intake, biographies, registration details, service arrangements and practice policies require approval before public launch.
 

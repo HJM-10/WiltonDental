@@ -10,6 +10,7 @@ async function main(){
   page.on('pageerror',e=>result.errors.push(e.message));
   for(const route of routes){
    const response=await page.goto(result.baseURL+route.path,{waitUntil:'networkidle'});assert.equal(response.status(),200,route.path);
+   await page.waitForTimeout(1600); // Audit settled text, after the entrance animations.
    await page.addScriptTag({path:path.join(root,'scripts/vendor/axe.min.js')});
    const a11y=await page.evaluate(async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}));});
    const scan=await page.evaluate(()=>({title:document.title,h1:document.querySelectorAll('h1').length,brokenImages:[...document.images].filter(i=>i.loading!=='lazy'&&(!i.complete||i.naturalWidth===0)).map(i=>i.src),links:[...document.querySelectorAll('a[href^="/"]')].map(a=>a.getAttribute('href')),placeholder:/lorem ipsum/i.test(document.body.innerText)}));
@@ -19,7 +20,7 @@ async function main(){
    result.pages.push({path:route.path,status:response.status(),...scan,links:scan.links.length,overflow,a11y});
    await page.setViewportSize({width:1440,height:1000});
   }
-  async function shot(url,name,width=1440,height=1000,selector=null){await page.setViewportSize({width,height});await page.goto(result.baseURL+url,{waitUntil:'networkidle'});if(selector){await page.locator(selector).scrollIntoViewIfNeeded();await page.waitForTimeout(600);}await page.screenshot({path:path.join(out,name+'.png')});result.screenshots.push(name);}
+  async function shot(url,name,width=1440,height=1000,selector=null){await page.setViewportSize({width,height});await page.goto(result.baseURL+url,{waitUntil:'networkidle'});if(selector){await page.locator(selector).scrollIntoViewIfNeeded();}await page.waitForTimeout(1400);await page.screenshot({path:path.join(out,name+'.png')});result.screenshots.push(name);}
   await shot('/','home-desktop');await page.screenshot({path:path.join(out,'home-full.png'),fullPage:true});
   await shot('/','home-mobile',390,844);
   await shot('/treatments/','treatments-desktop');await shot('/team/','team-desktop');
@@ -34,10 +35,37 @@ async function main(){
   assert.notEqual(await art.evaluate(img=>getComputedStyle(img).transform),before);
   result.interactionChecks.push('Original glossy tooth loads and moves automatically without viewer or motion controls');
   await page.getByRole('button',{name:'3D CBCT scan',exact:true}).click();assert.ok((await page.locator('[data-scan-image]').getAttribute('src')).includes('imaging-1'));await page.getByRole('button',{name:'Panoramic X-ray',exact:true}).click();result.interactionChecks.push('Imaging visualisation switches OPG/CBCT images, captions and pressed state');
+  await page.setViewportSize({width:1440,height:900});await page.goto(result.baseURL+'/about/');
+  await page.locator('.treatments-menu > summary').hover();await page.waitForTimeout(200);
+  assert.equal(await page.locator('.treatments-menu').getAttribute('open'),'');
+  await page.locator('.treatments-menu a').first().hover();await page.waitForTimeout(220);
+  assert.equal(await page.locator('.treatments-menu').getAttribute('open'),'');
+  await page.screenshot({path:path.join(out,'navigation-desktop.png')});
+  await page.locator('.practice-menu > summary').press('ArrowDown');
+  assert.equal(await page.locator('.treatments-menu').getAttribute('open'),null);
+  assert.equal(await page.locator('.practice-menu').getAttribute('open'),'');
+  await page.keyboard.press('Escape');assert.equal(await page.locator('.practice-menu').getAttribute('open'),null);
+  assert.equal(await page.locator('.practice-menu > summary').evaluate(el=>el===document.activeElement),true);
+  result.interactionChecks.push('Desktop dropdowns support hover, keyboard opening, exclusive expansion and Escape focus restoration');
   await page.setViewportSize({width:390,height:844});await page.goto(result.baseURL+'/');
-  await page.getByRole('button',{name:'Menu',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Menu',exact:true}).getAttribute('aria-expanded'),'true');
-  await page.keyboard.press('Escape');assert.equal(await page.getByRole('button',{name:'Menu',exact:true}).getAttribute('aria-expanded'),'false');
-  await page.getByRole('button',{name:'Menu',exact:true}).click();await page.locator('#main-nav').getByRole('link',{name:'Our team',exact:true}).click();assert.ok(page.url().endsWith('/team/'));result.interactionChecks.push('Mobile menu opens, Escape closes with focus restored, and team link navigates');
+  await page.getByRole('button',{name:'Open menu',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Close menu',exact:true}).getAttribute('aria-expanded'),'true');
+  await page.waitForTimeout(350);await page.screenshot({path:path.join(out,'navigation-mobile.png')});
+  await page.locator('.treatments-menu > summary').click();
+  assert.equal(await page.locator('.treatments-menu').getAttribute('open'),'');
+  await page.locator('.practice-menu > summary').click();
+  assert.equal(await page.locator('.treatments-menu').getAttribute('open'),null);
+  await page.locator('#main-nav').getByRole('link',{name:'Our team',exact:false}).click();assert.ok(page.url().endsWith('/team/'));
+  await page.getByRole('button',{name:'Open menu',exact:true}).click();await page.keyboard.press('Escape');
+  assert.equal(await page.getByRole('button',{name:'Open menu',exact:true}).getAttribute('aria-expanded'),'false');
+  assert.equal(await page.locator('#main-nav').evaluate(el=>el.inert),true);
+  await page.setViewportSize({width:320,height:568});await page.getByRole('button',{name:'Open menu',exact:true}).click();
+  await page.locator('.treatments-menu > summary').click();await page.locator('.nav-all-treatments').scrollIntoViewIfNeeded();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  assert.equal(await page.locator('#main-nav').evaluate(el=>el.scrollHeight>el.clientHeight),true);
+  await page.screenshot({path:path.join(out,'navigation-small-phone.png')});
+  await page.setViewportSize({width:1440,height:900});assert.equal(await page.locator('#main-nav').evaluate(el=>el.inert),false);
+  result.interactionChecks.push('Mobile accordion opens, closes, navigates, scrolls on small phones and resets at desktop breakpoint');
+  await page.setViewportSize({width:390,height:844});
   await page.goto(result.baseURL+'/treatments/');await page.getByRole('button',{name:'Smile confidence',exact:true}).click();assert.equal(await page.locator('.treatment-card:visible').count(),3);await page.getByRole('button',{name:'All treatments',exact:true}).click();assert.equal(await page.locator('.treatment-card:visible').count(),13);result.interactionChecks.push('Treatment filters show correct cards and restore all 13 services');
   const sourceHTML=fs.readFileSync(path.join(root,'docs/sources/home.html'),'utf8');
   const originalMap=sourceHTML.match(/<iframe[\s\S]*?src="([^"]+)"/)[1].replace(/&(?:amp|#0*38);/g,'&');
@@ -58,7 +86,7 @@ async function main(){
   const reduced=await browser.newContext({reducedMotion:'reduce',viewport:{width:390,height:844}});const rp=await reduced.newPage();await rp.goto(result.baseURL+'/');
   assert.equal(await rp.locator('.tooth-art img').evaluate(el=>getComputedStyle(el).animationName),'none');
   await rp.screenshot({path:path.join(out,'reduced-motion-mobile.png')});result.interactionChecks.push('Reduced motion disables the automatic tooth animation');await reduced.close();
-  const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const np=await nojs.newPage();await np.goto(result.baseURL+'/treatments/');assert.equal(await np.locator('.treatment-card:visible').count(),13);assert.equal(await np.locator('#main-nav a:visible').count(),8);result.interactionChecks.push('All services and navigation remain available with JavaScript disabled');await nojs.close();
+  const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const np=await nojs.newPage();await np.goto(result.baseURL+'/treatments/');assert.equal(await np.locator('.treatment-card:visible').count(),13);await np.locator('.practice-menu > summary').click();assert.ok(await np.locator('.practice-menu a').last().isVisible());result.interactionChecks.push('All services and navigation remain available with JavaScript disabled');await nojs.close();
   const savedata=await browser.newContext();await savedata.addInitScript(()=>Object.defineProperty(navigator,'connection',{value:{saveData:true}}));const sp=await savedata.newPage();await sp.goto(result.baseURL+'/');
   assert.equal(await sp.locator('.tooth-art img').evaluate(el=>getComputedStyle(el).animationName),'none');result.interactionChecks.push('Data-saving mode keeps the static illustration');await savedata.close();
   await page.setViewportSize({width:390,height:844});await page.goto(result.baseURL+'/');
