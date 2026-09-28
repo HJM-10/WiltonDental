@@ -1,6 +1,6 @@
 # Wilton Dental project audit
 
-The current audit is the professional A4 report at `output/pdf/Wilton-Dental-Project-Report.pdf`.
+The baseline audit is the professional A4 report at `output/pdf/Wilton-Dental-Project-Report.pdf`. The September 28 visual update is documented here, in `docs/ARTWORK.md` and in the current browser verification results; the baseline PDF predates that update.
 
 It supersedes the original single-page prototype assessment and includes source evidence, visual comparisons, architecture, content coverage, animation/3D decisions, verification results, technical handover and launch requirements.
 
@@ -9,8 +9,9 @@ It supersedes the original single-page prototype assessment and includes source 
 - 28 content pages plus a not-found page, and four legacy route aliases.
 - 13 dedicated treatment pages and a separate imaging page.
 - All six published team members and individual profiles.
-- Original logo and source images retained.
-- Animated 3D opening, image explorer, scroll/card effects and motion controls.
+- Original logo, practice/team photography and diagnostic scan examples retained; ten generated treatment illustrations added.
+- Original glossy tooth restored with automatic decorative motion; viewer and pause/resume controls removed. Image explorer and scroll/card effects retained.
+- Mobile navigation, hero, treatment cards, imaging dimensions, location and footer spacing reworked; patient journey displayed in animated cards.
 - Restored four-stage care journey, working contact destinations and the original Google Maps embed on the homepage and contact page.
 - Zero recorded axe rule violations or horizontal overflow findings across the tested routes and widths in the final local run.
 

@@ -5,7 +5,6 @@
   let scrollFrame = 0;
   function updateJourney() {
     const timeline=document.querySelector('#timeline');if(!timeline)return;
-    if(document.documentElement.dataset.motion==='paused' && !reduced.matches)return;
     const steps=[...timeline.querySelectorAll('.journey-step')];
     const first=steps[0].querySelector('.step-dot').getBoundingClientRect();
     const last=steps.at(-1).querySelector('.step-dot').getBoundingClientRect();
@@ -19,8 +18,6 @@
   addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{updateScroll();updateJourney();});},{passive:true});
   addEventListener('resize',updateJourney);reduced.addEventListener('change',updateJourney);document.addEventListener('site-motion',updateJourney);
   document.fonts.ready.then(updateJourney);updateScroll();updateJourney();
-  const motionHome=document.querySelector('.hero-bottom');
-  if(motionHome && !reduced.matches){const b=document.createElement('button');b.type='button';b.className='motion-toggle';b.textContent='Pause motion';b.setAttribute('aria-pressed','false');motionHome.append(b);b.addEventListener('click',()=>{const paused=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'Resume motion':'Pause motion';document.documentElement.dataset.motion=paused?'paused':'active';document.dispatchEvent(new CustomEvent('site-motion',{detail:{paused}}));});}
   const mobile = matchMedia('(max-width: 960px)');
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#main-nav');
@@ -54,17 +51,14 @@
   }
   if('IntersectionObserver' in window && !reduced.matches) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('fade-enter'); observer.unobserve(entry.target); } }), {threshold:.12});
-    document.querySelectorAll('.section-heading,.steps li,.side-panel,.treatment-card,.team-card,.info-grid article,.image-feature').forEach((el,i) => {el.style.setProperty('--reveal-delay',`${(i%3)*70}ms`);observer.observe(el);});
+    document.querySelectorAll('.section-heading,.care-strip .wrap>div,.step-copy,.side-panel,.treatment-card,.team-card,.info-grid article,.image-feature,.location-grid>div,.footer-grid>*,.imaging-explorer').forEach((el,i) => {el.style.setProperty('--reveal-delay',`${(i%3)*90}ms`);observer.observe(el);});
   }
-  document.querySelectorAll('[data-tooth-viewer]').forEach(el => {
-    // Static reading remains available on reduced-motion and data-saving devices.
-    if(reduced.matches || navigator.connection?.saveData || !('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(entries => {
-      if(entries.some(e => e.isIntersecting)) {
-        observer.disconnect();
-        import('/assets/tooth-viewer.js').then(m => m.mountTooth(el)).catch(() => { el.dataset.viewerState = 'fallback'; });
-      }
-    },{rootMargin:'250px'});
-    observer.observe(el);
-  });
+  // Let decorative motion rest offscreen without hiding any content.
+  if ('IntersectionObserver' in window) {
+    const motionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      entry.target.classList.toggle('motion-in-view', entry.isIntersecting);
+    }));
+    document.querySelectorAll('.tooth-art').forEach(el => motionObserver.observe(el));
+  }
+  if (navigator.connection?.saveData) document.documentElement.classList.add('save-data');
 })();

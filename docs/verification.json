@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-26",
+  "date": "2026-09-28",
   "baseURL": "http://localhost:4173",
   "pages": [
     {
@@ -8,7 +8,7 @@
       "title": "Dental care in Victoria, London | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 38,
+      "links": 39,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -19,7 +19,7 @@
       "title": "Treatments | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 33,
+      "links": 34,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -30,7 +30,7 @@
       "title": "White fillings | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -41,7 +41,7 @@
       "title": "Dental implants | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -52,7 +52,7 @@
       "title": "Invisible braces | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -63,7 +63,7 @@
       "title": "Root canal treatment | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -74,7 +74,7 @@
       "title": "Dental hygiene | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -85,7 +85,7 @@
       "title": "Wisdom-tooth care | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -96,7 +96,7 @@
       "title": "Conscious sedation | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -107,7 +107,7 @@
       "title": "Smile makeovers | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -118,7 +118,7 @@
       "title": "Teeth whitening | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -129,7 +129,7 @@
       "title": "Facial aesthetics | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -140,7 +140,7 @@
       "title": "Stress therapy | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -151,7 +151,7 @@
       "title": "Microdermabrasion | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -162,7 +162,7 @@
       "title": "Microneedling | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 25,
+      "links": 26,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -173,7 +173,7 @@
       "title": "Our team | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 26,
+      "links": 27,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -184,7 +184,7 @@
       "title": "Dr Wale Towolawi | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 23,
+      "links": 24,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -195,7 +195,7 @@
       "title": "Dr Namitha Shibu | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 23,
+      "links": 24,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -206,7 +206,7 @@
       "title": "Ms Shruti Pawar | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 23,
+      "links": 24,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -217,7 +217,7 @@
       "title": "Ms Steffeena Mathews | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 23,
+      "links": 24,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -228,7 +228,7 @@
       "title": "Ms Tinu Oloyede | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 23,
+      "links": 24,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -239,7 +239,7 @@
       "title": "Ms Sanju Balami | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 23,
+      "links": 24,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -250,7 +250,7 @@
       "title": "Our practice | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 21,
+      "links": 22,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -261,7 +261,7 @@
       "title": "Imaging & technology | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 22,
+      "links": 23,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -272,7 +272,7 @@
       "title": "NHS, independent & private care | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 22,
+      "links": 23,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -283,7 +283,7 @@
       "title": "Fees & finance | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 22,
+      "links": 23,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -294,7 +294,7 @@
       "title": "Contact & find us | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 20,
+      "links": 21,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -305,7 +305,7 @@
       "title": "Privacy & website information | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 19,
+      "links": 20,
       "placeholder": false,
       "overflow": [],
       "a11y": []
@@ -316,25 +316,25 @@
       "title": "Page not found | Wilton Dental Practice",
       "h1": 1,
       "brokenImages": [],
-      "links": 19,
+      "links": 20,
       "placeholder": false,
       "overflow": [],
       "a11y": []
     }
   ],
   "interactionChecks": [
-    "3D GLB loads, play/pause, rotate and reset controls work",
-    "Global pause/resume controls decorative motion and the 3D animation",
+    "Original glossy tooth loads and moves automatically without viewer or motion controls",
     "Imaging visualisation switches OPG/CBCT images, captions and pressed state",
     "Mobile menu opens, Escape closes with focus restored, and team link navigates",
     "Treatment filters show correct cards and restore all 13 services",
     "Contact preserves treatment context; exact original Google Maps embed is visible without an extra button",
     "Homepage restores all four care-journey steps, scroll progress and the same exact practice map",
     "All 22 referenced image/script assets return HTTP 200",
-    "Reduced motion keeps static fallback and makes no GLB request",
+    "Reduced motion disables the automatic tooth animation",
     "All services and navigation remain available with JavaScript disabled",
-    "Failed model request leaves the static image and hides unavailable controls",
     "Data-saving mode keeps the static illustration",
+    "Benefit cards and journey cards animate on mobile scroll",
+    "Imaging uses smaller stacked mobile images while preserving full scans",
     "Homepage has no horizontal overflow with root text size doubled"
   ],
   "errors": [],
@@ -348,6 +348,11 @@
     "contact-desktop",
     "precision-desktop",
     "journey-desktop",
-    "map-desktop"
+    "map-desktop",
+    "benefits-mobile",
+    "treatments-mobile",
+    "footer-mobile",
+    "imaging-mobile",
+    "imaging-desktop"
   ]
 }

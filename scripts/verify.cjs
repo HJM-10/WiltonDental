@@ -2,7 +2,7 @@ const {chromium}=require('C:/Users/MPS/.cache/codex-runtimes/codex-primary-runti
 const fs=require('fs');const path=require('path');const assert=require('assert/strict');
 const root=path.resolve(__dirname,'..');const routes=JSON.parse(fs.readFileSync(path.join(root,'docs/routes.json'),'utf8'));
 const out=path.join(root,'audit/screenshots/rebuild');fs.mkdirSync(out,{recursive:true});
-const result={date:'2026-09-26',baseURL:'http://localhost:4173',pages:[],interactionChecks:[],errors:[],screenshots:[]};
+const result={date:'2026-09-28',baseURL:'http://localhost:4173',pages:[],interactionChecks:[],errors:[],screenshots:[]};
 async function main(){
  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--enable-webgl','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  try{
@@ -26,12 +26,13 @@ async function main(){
   await shot('/treatments/root-canal/','treatment-mobile',390,844);
   await shot('/team/namitha-shibu/','profile-mobile',390,844);
   await shot('/contact/','contact-desktop');await shot('/','precision-desktop',1440,1000,'.precision');
-  const viewer=page.locator('[data-tooth-viewer]');await viewer.scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelector('[data-tooth-viewer]').dataset.viewerState==='ready',{timeout:15000});
-  await page.getByRole('button',{name:'Pause rotation',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Play rotation',exact:true}).getAttribute('aria-pressed'),'false');
-  await page.getByRole('button',{name:'Play rotation',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Pause rotation',exact:true}).getAttribute('aria-pressed'),'true');
-  await page.getByRole('button',{name:'Rotate tooth left',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Play rotation',exact:true}).getAttribute('aria-pressed'),'false');
-  await page.getByRole('button',{name:'Reset view',exact:true}).click();result.interactionChecks.push('3D GLB loads, play/pause, rotate and reset controls work');
-  await page.getByRole('button',{name:'Pause motion',exact:true}).click();assert.equal(await page.locator('html').getAttribute('data-motion'),'paused');await page.getByRole('button',{name:'Resume motion',exact:true}).click();result.interactionChecks.push('Global pause/resume controls decorative motion and the 3D animation');
+  const art=page.locator('.tooth-art img');await art.scrollIntoViewIfNeeded();
+  await page.waitForFunction(()=>document.querySelector('.tooth-art img').complete);
+  assert.ok(await art.evaluate(img=>img.naturalWidth>0));
+  assert.equal(await page.locator('.viewer-controls,.motion-toggle,canvas').count(),0);
+  const before=await art.evaluate(img=>getComputedStyle(img).transform);await page.waitForTimeout(250);
+  assert.notEqual(await art.evaluate(img=>getComputedStyle(img).transform),before);
+  result.interactionChecks.push('Original glossy tooth loads and moves automatically without viewer or motion controls');
   await page.getByRole('button',{name:'3D CBCT scan',exact:true}).click();assert.ok((await page.locator('[data-scan-image]').getAttribute('src')).includes('imaging-1'));await page.getByRole('button',{name:'Panoramic X-ray',exact:true}).click();result.interactionChecks.push('Imaging visualisation switches OPG/CBCT images, captions and pressed state');
   await page.setViewportSize({width:390,height:844});await page.goto(result.baseURL+'/');
   await page.getByRole('button',{name:'Menu',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Menu',exact:true}).getAttribute('aria-expanded'),'true');
@@ -54,10 +55,29 @@ async function main(){
   const assets=[...new Set(routes.flatMap(r=>[...fs.readFileSync(path.join(root,'dist',r.file),'utf8').matchAll(/src="(\/assets\/[^\"]+)"/g)].map(m=>m[1])))];
   for(const asset of assets){const response=await context.request.get(result.baseURL+asset);assert.equal(response.status(),200,asset);}
   result.interactionChecks.push(`All ${assets.length} referenced image/script assets return HTTP 200`);
-  const reduced=await browser.newContext({reducedMotion:'reduce',viewport:{width:390,height:844}});const rp=await reduced.newPage();const requests=[];rp.on('request',r=>requests.push(r.url()));await rp.goto(result.baseURL+'/');await rp.locator('.precision').scrollIntoViewIfNeeded();await rp.waitForTimeout(800);assert.equal(await rp.locator('.tooth-canvas canvas').count(),0);assert.ok(!requests.some(u=>u.endsWith('tooth.glb')));await rp.screenshot({path:path.join(out,'reduced-motion-mobile.png')});result.interactionChecks.push('Reduced motion keeps static fallback and makes no GLB request');await reduced.close();
+  const reduced=await browser.newContext({reducedMotion:'reduce',viewport:{width:390,height:844}});const rp=await reduced.newPage();await rp.goto(result.baseURL+'/');
+  assert.equal(await rp.locator('.tooth-art img').evaluate(el=>getComputedStyle(el).animationName),'none');
+  await rp.screenshot({path:path.join(out,'reduced-motion-mobile.png')});result.interactionChecks.push('Reduced motion disables the automatic tooth animation');await reduced.close();
   const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const np=await nojs.newPage();await np.goto(result.baseURL+'/treatments/');assert.equal(await np.locator('.treatment-card:visible').count(),13);assert.equal(await np.locator('#main-nav a:visible').count(),8);result.interactionChecks.push('All services and navigation remain available with JavaScript disabled');await nojs.close();
-  const broken=await browser.newContext();const bp=await broken.newPage();await bp.route('**/tooth.glb',r=>r.abort());await bp.goto(result.baseURL+'/');await bp.locator('.precision').scrollIntoViewIfNeeded();await bp.waitForFunction(()=>document.querySelector('[data-tooth-viewer]').dataset.viewerState==='fallback');assert.ok(await bp.locator('.tooth-poster').isVisible());assert.equal(await bp.locator('.viewer-controls:visible').count(),0);result.interactionChecks.push('Failed model request leaves the static image and hides unavailable controls');await broken.close();
-  const savedata=await browser.newContext();await savedata.addInitScript(()=>Object.defineProperty(navigator,'connection',{value:{saveData:true}}));const sp=await savedata.newPage();await sp.goto(result.baseURL+'/');await sp.locator('.precision').scrollIntoViewIfNeeded();await sp.waitForTimeout(500);assert.equal(await sp.locator('.tooth-canvas canvas').count(),0);result.interactionChecks.push('Data-saving mode keeps the static illustration');await savedata.close();
+  const savedata=await browser.newContext();await savedata.addInitScript(()=>Object.defineProperty(navigator,'connection',{value:{saveData:true}}));const sp=await savedata.newPage();await sp.goto(result.baseURL+'/');
+  assert.equal(await sp.locator('.tooth-art img').evaluate(el=>getComputedStyle(el).animationName),'none');result.interactionChecks.push('Data-saving mode keeps the static illustration');await savedata.close();
+  await page.setViewportSize({width:390,height:844});await page.goto(result.baseURL+'/');
+  await page.locator('.care-strip').scrollIntoViewIfNeeded();await page.waitForTimeout(900);
+  assert.equal(await page.locator('.care-strip .fade-enter').count(),3);
+  await page.locator('#journey .step-copy').first().scrollIntoViewIfNeeded();await page.waitForTimeout(200);
+  assert.ok(await page.locator('#journey .step-copy.fade-enter').count()>0);
+  result.interactionChecks.push('Benefit cards and journey cards animate on mobile scroll');
+  await shot('/','benefits-mobile',390,844,'.care-strip');
+  await shot('/','treatments-mobile',390,844,'#treatments');
+  await shot('/','footer-mobile',390,844,'.site-footer');
+  await shot('/imaging/','imaging-mobile',390,844);
+  const mobileScanHeight=await page.locator('.image-feature img').first().evaluate(el=>el.getBoundingClientRect().height);
+  await page.setViewportSize({width:1440,height:1000});
+  const desktopScanHeight=await page.locator('.image-feature img').first().evaluate(el=>el.getBoundingClientRect().height);
+  assert.ok(mobileScanHeight<desktopScanHeight);
+  assert.equal(await page.locator('.image-feature img').first().evaluate(el=>getComputedStyle(el).objectFit),'contain');
+  result.interactionChecks.push('Imaging uses smaller stacked mobile images while preserving full scans');
+  await shot('/imaging/','imaging-desktop');
   await page.setViewportSize({width:1280,height:900});await page.goto(result.baseURL+'/');await page.evaluate(()=>document.documentElement.style.fontSize='200%');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);result.interactionChecks.push('Homepage has no horizontal overflow with root text size doubled');
  }catch(e){result.errors.push(e.stack);}finally{await browser.close();fs.writeFileSync(path.join(root,'docs/verification.json'),JSON.stringify(result,null,2));const issues=result.pages.flatMap(p=>[...p.overflow,...p.a11y,...p.brokenImages,...(p.h1===1&&!p.placeholder?[]:['structure'])]);console.log(JSON.stringify({pages:result.pages.length,checks:result.interactionChecks,issues:issues.length,errors:result.errors,findings:result.pages.filter(p=>p.overflow.length||p.a11y.length)},null,2));if(issues.length||result.errors.length)process.exitCode=1;}
 }
